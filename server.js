@@ -37,17 +37,17 @@ function createProxyServer({path, target}) {
 
 // 配置每个代理服务器
 const proxyConfigurations = [
-    {path: '/api', target: 'https://feiying.ahjinti.cn'},
+    {path: '/api', target: 'https://feiying.ahjinti.cn',name:'师傅驿站'},
     // {path: '/anotherApi', target: 'https://another-server.example.com'},
 ];
 
 // 启动多个代理服务器
-proxyConfigurations.forEach(({path, target}, index) => {
+proxyConfigurations.forEach(({path, target,name}, index) => {
     const app = createProxyServer({path, target});
     const PORT = 3000 + index; // 3000, 3001, ...
 
     app.listen(PORT, () => {
-        console.log(`代理服务器${index + 1}已启动 ${target} 应修改为：http://${IP}:${PORT}/api`);
+        console.log(`《${name}》 代理服已启动 ${target} --> http://${IP}:${PORT}/api`);
 
     });
 });
