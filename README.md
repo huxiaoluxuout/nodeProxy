@@ -1,1 +1,6 @@
-`npm start`
+```js
+npm install
+```
+```js
+npm start
+```
