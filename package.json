@@ -4,15 +4,16 @@
   "description": "开启代理，解决跨域",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "start": "nodemon server.js"
   },
-  "keywords": [],
+  "keywords": ["nodemon","跨域","http-proxy-middleware"],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "os": "^0.1.2"
   }
 }

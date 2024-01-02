@@ -1,6 +1,8 @@
 const express = require('express');
 const {createProxyMiddleware} = require('http-proxy-middleware');
 const cors = require('cors');
+const {getLocalIP} = require("./getLocalIP");
+const IP = getLocalIP()
 
 // 创建代理服务器函数
 function createProxyServer({path, target}) {
@@ -13,14 +15,25 @@ function createProxyServer({path, target}) {
         onProxyRes(proxyRes, req, res) {
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            /*let responseData = ''; // 保存返回的数据
+            proxyRes.on('data', (chunk) => {
+                responseData += chunk;
+            });
+
+            proxyRes.on('end', () => {
+                console.log(`代理服务器${path}返回的数据：`, responseData);
+            });*/
         },
+
         pathRewrite: {
             [`^${path}`]: '',
         },
+
     }));
 
     return app;
 }
+
 
 // 配置每个代理服务器
 const proxyConfigurations = [
@@ -34,6 +47,7 @@ proxyConfigurations.forEach(({path, target}, index) => {
     const PORT = 3000 + index; // 3000, 3001, ...
 
     app.listen(PORT, () => {
-        console.log(`代理服务器 ${index + 1} http://localhost:${PORT} 已启动，监听端口 ${PORT}`);
+        console.log(`代理服务器${index + 1}已启动 ${target} 应修改为：http://${IP}:${PORT}/api`);
+
     });
 });
